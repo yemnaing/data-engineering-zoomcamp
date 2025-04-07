@@ -1,0 +1,43 @@
+name: ymn_project2
+profile: my_profile
+version: 1.0
+
+config-version: 2
+
+description: 'DBT project for ymn-project2 data transformation'
+
+models:
+  ymn_project2:
+    raw_data:
+      materialized: table
+      description: 'Raw data imported from the GCS bucket'
+    cleaned_data:
+      materialized: view
+      description: 'Cleaned data after basic transformations'
+    aggregated_data:
+      materialized: table
+      description: 'Aggregated data for analysis and dashboard'
+
+sources:
+  - name: my_dataset
+    description: 'Source data from GCS'
+    tables:
+      - name: raw_data
+        description: 'Raw data table from the pipeline'
+
+
+vars:
+  project_id: my-gcp-project-id
+  dataset: my_dataset
+  location: US
+
+
+seeds:
+  ymn_project2:
+    enabled: true
+
+
+log-path: logs/
+target-path: target/
+data-paths: ['data/']
+dbt
